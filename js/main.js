@@ -19,7 +19,7 @@ function loadMovieData(title = null) {
         .then((res) => {res.json()})
         .then((data) => {
             let rows = generateTable(data);
-            addTable(rows);
+            updateDOM(rows);
         });
 }
 
@@ -33,11 +33,11 @@ function generateTable(data) {
             <td>${movie.rated ? movie.rated : 'N/A'}</td>
             <td>${Math.floor(movie.runtime / 60)}:${(movie.runtime % 60).toString().padStart(2,'0')}</td>
         </tr>`
-    })}`
+    }).join('')}`;
     return rows;
 }
 
-// Adds an an array of table rows to the movies table
-function addTable(rows) {
-
+// Adds an array of table rows to the movies table
+function updateDOM(rows) {
+    document.querySelector('tbody').innerHTML = rows;
 }
