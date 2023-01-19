@@ -15,8 +15,9 @@ function loadMovieData(title = null) {
         let pagination = document.getElementsByClassName("pagination");
         pagination[0].classList.remove("d-none");
     }
-    fetch(API_URL + query)
-        .then((res) => {res.json()})
+    console.log(API_URL + query);
+    fetch(encodeURI(API_URL + query))
+        .then((res) => res.json())
         .then((data) => {
             let rows = generateTable(data);
             updateDOM(rows);
@@ -25,7 +26,7 @@ function loadMovieData(title = null) {
 
 // Generates table rows for each movie in a list of movies
 function generateTable(data) {
-    let rows = `${data.map(movie => {
+    let rows = `${data.map((movie) => (
         `<tr data-id=${movie._id}>
             <td>${movie.year}</td>
             <td>${movie.title}</td>
@@ -33,11 +34,20 @@ function generateTable(data) {
             <td>${movie.rated ? movie.rated : 'N/A'}</td>
             <td>${Math.floor(movie.runtime / 60)}:${(movie.runtime % 60).toString().padStart(2,'0')}</td>
         </tr>`
-    }).join('')}`;
+    )).join('')}`;
+    let cols = `${data.map((movie) => (
+        `<tr data-id=${movie._id}>
+        </tr>`
+    )).join('')}`;
     return rows;
 }
 
 // Adds an array of table rows to the movies table
 function updateDOM(rows) {
     document.querySelector('tbody').innerHTML = rows;
+    document.querySelector('#curr-page').innerHTML = page;
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadMovieData();
+});
