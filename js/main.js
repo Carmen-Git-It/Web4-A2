@@ -1,3 +1,13 @@
+/*********************************************************************************
+*  WEB422 – Assignment 2
+*  I declare that this assignment is my own work in accordance with Seneca Academic Policy.  
+*  No part of this assignment has been copied manually or electronically from any other source
+*  (including web sites) or distributed to other students.
+* 
+*  Name: Carmen Whitton Student ID: 102710217 Date: Jan. 27th, 2022
+*
+********************************************************************************/ 
+
 var page = 1;
 const perPage = 10;
 const API_URL = "https://inquisitive-lamb-costume.cyclic.app"
@@ -104,6 +114,9 @@ document.addEventListener('DOMContentLoaded', () => {
         loadMovieData();
     });
 
+    // Modal backdrop is causing me issues, haven't figured it out yet.
+    // Seems to just be a bootstrap issue.
+    
     // document.getElementById('modalClose').addEventListener('click', (e) => {
     //     document.querySelector('body').classList.remove('modal-open');
     //     document.querySelector('body').style.overflow = null;
