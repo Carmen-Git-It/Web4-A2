@@ -46,6 +46,31 @@ function updateDOM(rows) {
     });
 
     document.querySelector('#curr-page').innerHTML = page;
+
+    document.querySelector('#prev-page').addEventListener("click", () => {
+        if (page > 1) {
+            page--;
+            loadMovieData();
+        }
+    });
+
+    document.querySelector('#next-page').addEventListener("click", () => {
+        // Unsure what the max page number is, perhaps fix in the next version?
+        page++;
+        loadMovieData();
+    });
+
+    document.querySelector('search-btn').addEventListener("click", () => {
+        let title = document.querySelector('#title').value;
+        if (title !== '') {
+            loadMovieData(title);
+        }
+    });
+
+    document.querySelector('#clearForm').addEventListener("click", () => {
+        document.querySelector('#title').innerHTML = '';
+        loadMovieData();
+    });
 }
 
 function onRowClick(event) {
@@ -67,7 +92,7 @@ function onRowClick(event) {
             
             //document.querySelector('.modal').addEventListener
             let myModal = new bootstrap.Modal(document.getElementById('movieModal'), {
-                backdrop: false, // default true - "static" indicates that clicking on the backdrop will not close the modal window
+                backdrop: true, // default true - "static" indicates that clicking on the backdrop will not close the modal window
                 keyboard: false, // default true - false indicates that pressing on the "esc" key will not close the modal window
                 focus: true, // default true - this instructs the browser to place the modal window in focus when initialized
             });
@@ -76,10 +101,10 @@ function onRowClick(event) {
         });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadMovieData();
-    document.getElementById('modalClose').addEventListener('click', (e) => {
-        document.querySelector('body').classList.remove('modal-open');
-        document.querySelector('body').style.overflow = null;
-    });
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//     loadMovieData();
+//     document.getElementById('modalClose').addEventListener('click', (e) => {
+//         document.querySelector('body').classList.remove('modal-open');
+//         document.querySelector('body').style.overflow = null;
+//     });
+// });
